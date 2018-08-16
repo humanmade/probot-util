@@ -43,7 +43,6 @@ const isLambdaEnvironment = () => {
 const buildHandler = probot => {
 	return function ( event, context, callback ) {
 		console.log( JSON.stringify( event, null, 2 ) );
-		return;
 
 		// Determine incoming webhook event type
 		// Checking for different cases since node's http server is lowercasing everything
