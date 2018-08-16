@@ -3,7 +3,6 @@ const path = require( 'path' );
 const tar = require( 'tar' );
 
 const {
-	DOWNLOAD_DIR,
 	ensureDirectory,
 	saveDownloadedFile,
 } = require( './file' );
@@ -21,8 +20,6 @@ const download = async ( extractDir, pushConfig, github ) => {
 		ref:            commit,
 	});
 
-	// Ensure the download directory exists before using it.
-	await ensureDirectory( DOWNLOAD_DIR );
 	const tarball = await saveDownloadedFile( archive.data, filename );
 
 	await ensureDirectory( extractDir );

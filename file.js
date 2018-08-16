@@ -5,12 +5,15 @@ const DOWNLOAD_DIR = '/tmp/downloads';
 
 const saveDownloadedFile = ( buffer, filename ) => {
 	const downloadPath = path.join( DOWNLOAD_DIR, filename );
-	return new Promise( ( resolve, reject ) => {
-		const handle = fs.createWriteStream( downloadPath );
-		handle.end( buffer, () => {
-			handle.close( () => resolve( downloadPath ) );
-		} );
-	} );
+
+	// Ensure the download directory exists before using it.
+	return ensureDirectory( DOWNLOAD_DIR )
+		.then( () => new Promise( ( resolve, reject ) => {
+			const handle = fs.createWriteStream( downloadPath );
+			handle.end( buffer, () => {
+				handle.close( () => resolve( downloadPath ) );
+			} );
+		} ) );
 };
 
 const ensureDirectory = function ( directory ) {
