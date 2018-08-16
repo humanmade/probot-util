@@ -20,7 +20,8 @@ const create = () => {
 	// Set up probot.
 	let cert;
 	try {
-		cert = fs.readFileSync( 'private-key.pem', 'utf8' );
+		const certFilename = process.env.CERT_FILENAME || 'private-key.pem';
+		cert = fs.readFileSync( certFilename, 'utf8' );
 	} catch ( err ) {
 		throw new Error( 'Missing or unreadable private key' );
 	}
