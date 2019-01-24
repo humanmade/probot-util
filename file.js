@@ -16,8 +16,13 @@ const saveDownloadedFile = ( buffer, filename ) => {
 		} ) );
 };
 
+const ensuring = {};
 const ensureDirectory = function ( directory ) {
-	return new Promise( ( resolve, reject ) => {
+	if ( directory in ensuring ) {
+		return ensuring[ directory ];
+	}
+
+	ensuring[ directory ] = new Promise( ( resolve, reject ) => {
 		fs.stat( directory, ( err, stats ) => {
 			if ( ! err ) {
 				if ( ! stats.isDirectory() ) {
@@ -41,6 +46,7 @@ const ensureDirectory = function ( directory ) {
 			} );
 		} );
 	} );
+	return ensuring[ directory ];
 };
 
 module.exports = {
