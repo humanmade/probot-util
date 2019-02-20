@@ -46,6 +46,12 @@ const ensureDirectory = function ( directory ) {
 			} );
 		} );
 	} );
+
+	// Clear cache after complete.
+	ensuring[ directory ].finally( () => {
+		delete ensuring[ directory ];
+	} );
+
 	return ensuring[ directory ];
 };
 
