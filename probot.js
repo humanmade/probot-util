@@ -59,6 +59,8 @@ const buildHandler = probot => {
 			// Do the thing.
 			probot.receive( {
 				event: e,
+				metadata: event,
+				reqContext: context,
 				payload: event.body
 			} )
 				.then( err => {
