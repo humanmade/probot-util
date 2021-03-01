@@ -29,7 +29,7 @@ const download = async ( extractDir, pushConfig, github ) => {
 		cwd:   extractDir,
 		file:  tarball,
 		strip: 1,
-		filter: path => ! path.match( /\.(jpg|jpeg|png|gif|woff|swf|flv|fla|woff|svg|otf||ttf|eot|swc|xap)$/ ),
+		filter: path => ! path.match( /\.(jpg|jpeg|png|gif|woff|swf|flv|fla|woff|svg|otf||ttf|eot|swc|xap|pdf)$/ ),
 	} );
 	console.log( 'Completed extraction.' );
 
